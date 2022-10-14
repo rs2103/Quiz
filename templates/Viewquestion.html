@@ -1,0 +1,58 @@
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+  </style>
+</head>
+<br><br>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">View Questions</h6>
+    </div>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            {% comment %} <th scope="col">Course ID</th> {% endcomment %}
+            <th scope="col">Course Name</th>
+            <th scope="col">Total Questions</th>
+            <th scope="col">Total Marks</th>
+            <th scope="col">View Question</th>
+
+          </tr>
+        </thead>
+        <tbody>
+        {% for data in allQuestions %}
+          <tr>
+            <td>{{ data.course }}</td>
+            <td>{{ data.totalquestion }}</td>
+            <td>{{ data.totalmarks }}</td>
+            <td><a class="btn btn-primary btn-xs" href="/AdminViewquestion/{{data.course}}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+            
+          </tr>
+         {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}
+
+

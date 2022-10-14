@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>Subject Selection</title>
+    <style>
+        .logout_btn {
+            padding: 5px;
+            background: #19B3D3;
+            text-decoration: none;
+            float: right;
+            margin-top: -30px;
+            margin-right: 40px;
+            border-radius: 2px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            transition: 0.5s;
+      
+        }
+      
+        .logout_btn:hover {
+            background: #0B87A6;
+        }
+        .button{
+            margin-left:8%;
+        }
+    </style>
+</head>
+<body>
+    <div class="right_area">
+        <a href="/logout/" class="logout_btn">Logout</a>
+    </div>
+    <input type="hidden" name="email" id="email", value="{{ email }}">
+    <div class="container mt-5">
+        <h1 class="text-center h1 fw-bold mb-3 mx-1 mx-md-4 mt-3">Just Choose What To Play !!</h1>
+        <div class="row">
+            {% for subject in allsubjects %}
+            <div class="col-md-4 col-lg-4 col-12 mt-4">
+                <div class="card shadow p-4">
+                    <h3 style="text-align: center;">{{ subject.course }}</h3>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" onclick="openJavascript('{{ subject.course }}')">
+                        Start Quiz
+                    </button>
+                </div>
+            </div>
+            {% endfor%}
+        </div>   
+    </div>
+    <br><br>
+    <button  class="button"><a style="text-decoration: none;" href="/Studentdashboard">Back to Dashboard</a></button>
+
+  
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLongTitle">Rules:</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <div class="modal-body">
+                <ol>
+                    <li>All questions are mandatory.</li>
+                    <li>There are no negative marking.</li>
+                    <li>Cheating not allowed. If you cheat then you can't test yourself.</li>
+                    <li>Attempting all questions is mandatory.</li>
+                    <li>You should answer the question within a certain amount of time.</li>
+                </ol>
+                <p>Test yourself and have fun.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Deny</button>
+                <button type="button" class="btn btn-primary" onclick="startExam()">Accept</button>
+            </div>
+        </div>
+    </div>
+
+   </div>
+
+   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script>
+
+        var course = "";
+        var email = "";
+        function openJavascript(subject)
+        {
+            course = subject;
+            email = document.getElementById("email").value;
+        }
+
+        function startExam()
+        {
+            document.getElementById("exampleModalCenter").style.display = "none";
+            //call API forchecking thar the student already taken theexam or not
+            //alert("Call API: "+email + " " + course)
+
+            $.ajax({
+                headers: { "X-CSRFToken": '{{csrf_token}}' },
+                url: "/checkExamSubject/",
+                method: "post",
+                data: {"email": email, "course": course},
+                success: function(response)
+                {
+                    if(response == "1")
+                    {
+                        alert("You are already given the exam for "+course+ " course.")
+                        window.location.href = "";
+                    }
+                    else{
+                        window.location.href = "/Question/"+course;
+                    }
+                }
+            })
+
+            
+        }
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

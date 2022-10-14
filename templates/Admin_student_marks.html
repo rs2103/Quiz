@@ -1,0 +1,61 @@
+{% block content %}
+{%load static%}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+    .button{
+      color:#3b43d6;
+      margin-left:13%;
+    }
+  </style>
+</head>
+<br><br>
+<body>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Student Marks</h6>
+    </div>
+    <table class="table table-striped">
+      <thead>
+          <tr>
+            
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>View Marks</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for data in allStudents %}
+          <tr>
+            <td>{{ data.first_name }}</td>
+            <td>{{ data.last_name }}</td>
+            <td><a class="btn btn-primary btn-xs" href="/AdminViewmarks/{{ data.email }}"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+          </tr>
+         {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+<button class="button"><a href="/Adminstudent">Back</a></button>
+<br><br><br><br><br><br>
+{% endblock content %}
+</body>
+</html>

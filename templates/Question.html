@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Quiz Questions</title>
+    <style>
+      .card{
+        width: 30rem;
+        height:30rem;
+        display: block;
+        margin-left: auto;
+       margin-right: auto;
+       margin-top:8%;
+       border-radius:20px;
+      }
+      button{
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body onload="getQuestionSet()">
+    <input type="hidden" id="course" value="{{ course }}">
+    <input type="hidden" id="email" value="{{ email }}">
+
+    <div id="response"></div>
+
+  <form onsubmit="event.preventDefault();"> 
+    <div class="card shadow p-4">
+        <div class="card-header ">
+            <h6 class="text-center" id="timeleft">Time Left: 60 Sec</h6>
+        </div>
+      <div class="card-body">
+        <h4 class="card-title"><b id="question"></b></h4>
+        <br>
+        <input type="radio" name="answer" id="answer1" class="answer" >
+        <label for="a" id="sys_ans1">(A)</label>
+        <br><br>
+        <input type="radio" name="answer" id="answer2" class="answer">
+        <label for="b" id="sys_ans2">(B)</label>
+        <br><br>
+        <input type="radio" name="answer" id="answer3" class="answer" >
+        <label for="c" id="sys_ans3">(C)</label>
+        <br><br>
+        <input type="radio" name="answer" id="answer4" class="answer">
+        <label for="d" id="sys_ans4">(D)</label>
+      </div>
+      
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" id="nextbtn" onclick="nextQuestion()">Next</button>
+        <button type="button" class="btn btn-primary" id="finishbtn" onclick="submitExam()">Finsh</button>
+      </div>
+    </div>
+  </form>  
+    
+
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script>
+    var course = "";
+
+    var questionset = [];
+
+    var index = 0;
+
+    var useranswer = [];
+
+    function getQuestionSet()
+    {
+          course = document.getElementById("course").value;
+
+          var url_link = "/displayQuestion/"+course;
+          $.ajax({
+              url: url_link,
+              method:"get",
+              data: {},
+              success: function(response)
+              {
+                  questionset = response;
+                  //alert(questionset.length);
+
+                  for(i=0; i<questionset.length; i++)
+                  {
+                      useranswer[i] = "";
+                  }
+
+                  displayQuestion();
+              }
+          });
+
+    }
+
+     
+
+      var question = document.getElementById("question");
+      var sys_ans1 = document.getElementById("sys_ans1");
+      var sys_ans2 = document.getElementById("sys_ans2");
+      var sys_ans3 = document.getElementById("sys_ans3");
+      var sys_ans4 = document.getElementById("sys_ans4");
+
+      document.getElementById("finishbtn").style.display = 'none';
+
+      function displayQuestion() {
+
+          setTime();
+
+          if(index==questionset.length-1)
+          {
+              document.getElementById("nextbtn").style.display = 'none';
+              document.getElementById("finishbtn").style.display = 'block';
+          }
+          else{
+              document.getElementById("nextbtn").style.display = 'block';
+              document.getElementById("finishbtn").style.display = 'none';
+          }
+
+          document.getElementById("answer1").checked = false;
+          document.getElementById("answer2").checked = false;
+          document.getElementById("answer3").checked = false;
+          document.getElementById("answer4").checked = false;
+
+          if(useranswer[index] == 'a')
+          {
+              document.getElementById("answer1").checked = true;
+          }
+          if(useranswer[index] == 'b')
+          {
+              document.getElementById("answer2").checked = true;
+          }
+          if(useranswer[index] == 'c')
+          {
+              document.getElementById("answer3").checked = true;
+          }
+          if(useranswer[index] == 'd')
+          {
+              document.getElementById("answer4").checked = true;
+          }
+
+         
+
+          question.innerHTML = questionset[index].fields.question;
+          sys_ans1.innerHTML = questionset[index].fields.option1;
+          sys_ans2.innerHTML = questionset[index].fields.option2;
+          sys_ans3.innerHTML = questionset[index].fields.option3;
+          sys_ans4.innerHTML = questionset[index].fields.option4;
+      }
+
+      var time = 60;
+      var x;
+
+      function setTime()
+      {
+          clearInterval(x);
+          x = setInterval(function(){
+              document.getElementById("timeleft").innerHTML = "TIme Left: "+time+" sec";
+              time--;
+              if(time==-1)
+              {
+                  clearInterval(x);
+                  time = 60;
+                  nextQuestion();
+              }
+          },1500)
+      }
+
+      function nextQuestion() {
+         clearInterval(x);
+          time = 60;
+          setTime();
+          checkAnswer();
+          index++;
+          displayQuestion();
+      }
+      
+      function checkAnswer()
+      {
+          var ans = "";
+          if(document.getElementById("answer1").checked == true)
+          {
+              ans = "a";
+          }
+          else if(document.getElementById("answer2").checked == true)
+          {
+              ans = "b";
+          }
+          else if(document.getElementById("answer3").checked == true)
+          {
+              ans = "c";
+          }
+          else if(document.getElementById("answer4").checked == true)
+          {
+              ans = "d";
+          }
+          useranswer[index] = ans;
+          // alert("User Answer: " + ans);
+      }
+
+      function submitExam()
+      {
+         
+          var m = 0;
+          for(i=0; i<useranswer.length; i++)
+          {
+              if(useranswer[i] == questionset[i].fields.answer)
+              {
+                  //alert("System Answer: "+questionset[index].fields.answer + " User Answer: "+useranswer[i]);
+                  m++;
+              }
+          }
+
+          //alert("Total Marks : "+m);
+          
+          //Send Total marks in the database recpect to userid
+          
+          var email = document.getElementById("email").value;
+          
+          var result=[];
+          $.ajax({
+              url: "../saveMarks/",
+              method:"get",
+              data: {"email": email, "totalmarks": m, "course": course},
+              success: function(response)
+              {
+                  alert(response);
+                  window.location.href="../Studentviewmarks/";
+              }
+          });
+          
+          //document.write("You got total marks: "+m);
+          localStorage.setItem("marks", m);
+          localStorage.setItem("course",course);
+      }
+
+
+
+</script>
+
+</body>
+</html>

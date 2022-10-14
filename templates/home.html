@@ -1,0 +1,179 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="{% static 'footer.css' %}">
+    <title>Quiz Home Page</title>
+    <style>
+        .slider{
+            margin-left: 10%;
+            margin-top: 2%;
+            width: 80%;
+        }
+        .quizgif{
+            width: 20%;
+        }
+        .button{
+            border-radius: 2%;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Nav Bar Start -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Tech Quiz</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/Adminlogin">Admin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/login">Student</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- nav bar end -->
+    <br>
+    <!-- Head Start-->
+    <h3 style="text-align:center;font-family: sans-serif;">WELCOME TO TECH QUIZ</h3>
+    <h5 style="text-align:center;font-family: sans-serif;">Show us your tech knowledge here.</h5>
+    <!-- Head End -->
+      <!-- Carousel Start -->
+    <div class="slider">
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'quiz4.jpg' %}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                <h5 style="color: black;">TECH QUIZ</h5>
+                <p style="color: black;">Welcome to Tech Quiz. Here you can play quizes related to tech. Test yourself here with the best tech questions.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'quiz5.jpeg' %}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                <h5 style="color: black;">Think Quick!</h5>
+                <p style="color: black;">Show us your knowledge here.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'quiz3.jpg' %}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                <h5 style="color: black;">Level up your knowledge.</h5>
+                <p style="color: black;">Yes, You can be the Tech expert. Level up your knowledge to crack your interviews.</p>
+                </div>
+            </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+      <!-- Carousel End -->
+      <br>
+      <hr style="width: 75%;margin-left: 13%;">
+      <br>
+      <!-- Column Start -->
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="quizgif">
+              <div class="col-sm-12 col-md-12 col-lg-8">
+                <img src="{% static 'quizgif.webp' %}" alt="">
+              </div>
+            </div> 
+            <div class="col-sm-12 col-md-12 col-lg-8">
+              <p>Put your knowledge about all things technology to the test with our some questions quiz and have some nerdy fun in the process.</p>
+              <p>Because everything tech, from computers and the internet to software and big data, changes rapidly on a day-to-day basis, it’s now a must to stay up to date with the technology that dominates our modern day lives.</p>
+              <p>Are you up to speed on what is going on in the tech industry today?</p>
+              <p>Take our quiz to find out. Test how much you know about technology and learn a thing or two about the tech topics that will reshape our future for better or worse.</p>
+                       
+            </div>
+        </div>
+    </div>    
+    <!-- Column End -->
+    <hr style="width: 75%;margin-left: 13%;">
+
+    <!-- Footer Start  -->
+    <!-- Site footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">Tech Quiz <i>SHOW US YOUR TECH KNOWLEDGE HERE </i> is a online quiz test platform where students can test themselves with tech knowledge. Tech Quiz mainly focuses on providing tech knowledges to the students by a form of quiz test. We will help students to gain tech knowledges and to get ready for the interview.</p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Categories</h6>
+            <ul class="footer-links">
+              <li>Java</li>
+              <li>Python</li>
+              <li>JavaScript</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>C</li>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="/AboutUs">About Us</a></li>
+              <li><a href="{% static 'contact.jpeg' %}" alt="">Contact Us</a></li>
+              
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            {% comment %} <p class="copyright-text">Copyright &copy; 2022 All Rights Reserved by  {% endcomment %}
+              Tech Quiz
+            {% comment %} </p> {% endcomment %}
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="https://www.facebook.com/login/"><i class="bi bi-facebook"></i></a></li>
+              <li><a class="twitter" href="https://twitter.com/i/flow/login"><i class="bi bi-twitter"></i></a></li>
+              <li><a class="github" href="https://github.com/login"><i class="bi bi-github"></i></a></li>
+              <li><a class="linkedin" href="https://www.linkedin.com/login"><i class="bi bi-linkedin"></i></a></li>   
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>
+    <!-- Footer End -->
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>

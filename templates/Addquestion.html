@@ -1,0 +1,63 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  a:link {
+        text-decoration: none;
+      }
+    
+  </style>
+</head>
+<body>
+<h2 style="text-align:center; color:blue;">ADD QUESTION</h2>
+<form action="/saveQuestion/" method="POST"  style="margin:100px;margin-top: 0px;">
+    {%csrf_token%}
+    <div class="form-group">
+        <label for="course">Course</label>
+        <select class="form-control" name="course">
+        <option>HTML</option>
+        <option>CSS</option>
+        <option>Javascript</option>
+        <option>Python</option>
+        <option>Java</option>
+        <option>C</option>
+        </select>
+        <br>
+      <label for="marks">Marks</label>
+      <input type="text" placeholder="" id="3" name="marks" class="form-control" />
+        <br>
+      <label for="question">Question</label>
+      <textarea class="form-control" placeholder="" id="2" rows="3" name="question"></textarea>
+        <br>
+      <label for="option1">Option 1</label>
+      <input type="text" placeholder="" id="3" name="option1" class="form-control" />
+        <br>
+      <label for="option2">Option 2</label>
+      <input type="text" placeholder="" id="4" name="option2" class="form-control" />
+        <br>
+      <label for="option3">Option 3</label>
+      <input type="text" placeholder="" id="5" name="option3" class="form-control" />
+        <br>
+      <label for="option4">Option 4</label>
+      <input type="text" placeholder="" id="6" name="option4" class="form-control" />
+        <br>
+      <label for="answer">Answer</label>
+      <input type="text" placeholder="" id="7" name="answer" class="form-control" />
+    </div>
+    
+
+    <button type="submit" class="btn btn-primary">ADD</button>
+  </form>
+<br><br><br>
+{% endblock content %}
+</body>
+</html>
